@@ -33,7 +33,7 @@
 | 8/5 | 양유진 | 텍스트 전처리 |
 | 8/5 | 서민균 | 벡터의 유사도 & 토픽 모델 |
 | 8/14 | 안유진 | 순환 신경망(RNN & GRU & LSTM) |
-| 8/14 | 양유진 | RNN을 이용한 텍스트 분류 |
+| 8/14 | 양유진 | RNN을 이용한 텍스트 분류(BiLSTM) |
 | 8/14 | 최희정 | [Sequence to Sequence Learning with Neural Networks](https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf)(Paper) |
 
   
