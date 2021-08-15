@@ -9,7 +9,7 @@
 >- 여기 뭐 소개글 간단히 적어도 좋을 긋
 >- 폴더는 어떻게 만들어서 정리자료 올리지
 
-|                 AhnYujin               |                 양유                |              히졍               |
+|                 AhnYujin               |                                 |              히졍               |
 | :------------------------------------------: | :-----------------------------------------: | :----------------------------------------: |
 | <img src="https://avatars.githubusercontent.com/u/59716219?s=60&v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/61388801?v=4" width=150px>  | <img src="https://avatars.githubusercontent.com/u/55623131?v=4" width=150px> | 
 |                   **[Github](https://github.com/dkswndms4782)**                   |                   **[Github](https://github.com/geenie97)**                   |               **[Github](https://github.com/huijeong12)**               |  
