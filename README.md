@@ -35,6 +35,9 @@
 | 8/14 | 안유진 | 순환 신경망(RNN & GRU & LSTM) |
 | 8/14 | 양유진 | RNN을 이용한 텍스트 분류(BiLSTM) |
 | 8/14 | 최희정 | [Sequence to Sequence Learning with Neural Networks](https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf)(Paper) |
+| 8/22 | 양유진 | 워드임베딩 & [ELMo](https://aclweb.org/anthology/N18-1202) |
+| 8/22 | 최희정 | NLP를 위한 합성곱 신경망 & [Word2Vec](https://arxiv.org/pdf/1301.3781.pdf) |
+| 8/22 | 안유진 | 태깅 작업 & [Glove](https://nlp.stanford.edu/pubs/glove.pdf) |
 
   
 ## 4.스터디 규칙
