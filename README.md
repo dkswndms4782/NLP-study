@@ -6,9 +6,6 @@
 ---
 
 ### 1.팀원 소개
->- 여기 뭐 소개글 간단히 적어도 좋을 긋
->- 폴더는 어떻게 만들어서 정리자료 올리지
-
 |                 AhnYujin               |                Geenie         |              히졍               |
 | :------------------------------------------: | :-----------------------------------------: | :----------------------------------------: |
 | <img src="https://avatars.githubusercontent.com/u/59716219?s=60&v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/61388801?v=4" width=150px>  | <img src="https://avatars.githubusercontent.com/u/55623131?v=4" width=150px> | 
@@ -35,9 +32,9 @@
 | 8/14 | 안유진 | 순환 신경망(RNN & GRU & LSTM) |
 | 8/14 | 양유진 | RNN을 이용한 텍스트 분류(BiLSTM) |
 | 8/14 | 최희정 | [Sequence to Sequence Learning with Neural Networks](https://papers.nips.cc/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf)(Paper) |
-| 8/22 | 양유진 | 워드임베딩 & [ELMo](https://aclanthology.org/N18-1202.pdf) |
-| 8/22 | 최희정 | NLP를 위한 합성곱 신경망 & [Word2Vec](https://arxiv.org/pdf/1301.3781.pdf) |
-| 8/22 | 안유진 | 태깅 작업 & [Glove](https://nlp.stanford.edu/pubs/glove.pdf) |
+| 8/24 | 양유진 | 워드임베딩 & [ELMo](https://aclanthology.org/N18-1202.pdf) |
+| 8/24 | 최희정 | NLP를 위한 합성곱 신경망 & [Word2Vec](https://arxiv.org/pdf/1301.3781.pdf) |
+| 8/24 | 안유진 | 태깅 작업 & [Glove](https://nlp.stanford.edu/pubs/glove.pdf) |
 
   
 ## 4.스터디 규칙
