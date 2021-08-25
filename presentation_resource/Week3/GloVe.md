@@ -1,4 +1,4 @@
-# <Paper Review>GloVe: Global Vectors for Word Representation
+# <Paper Review> GloVe: Global Vectors for Word Representation
 
 > ## 기존 문제점
 
