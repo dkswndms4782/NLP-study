@@ -4,7 +4,8 @@
 - **OOV 문제**: 모르는 단어로 인해 문제를 푸는 것이 까다로워지는 상황
 <br><br><br>
 - **Subword Segmentation**: 하나의 단어를 여러 서브워드로 분리해서 단어를 인코딩, 임베딩하려는 전처리 작업
-    - Byte Pair Encoding(2015), Word Piece(2016), Unigram Segmentation(2018), Gradient-Based Subword Tokenization(2021) 등 다양한 메소드로 수행.
+    - [Byte Pair Encoding(2015)](https://arxiv.org/pdf/1508.07909v5.pdf), [Word Piece(2016)](https://arxiv.org/pdf/1609.08144v2.pdf), [Unigram Segmentation(2018)](https://arxiv.org/pdf/1804.10959v1.pdf), [Gradient-Based Subword Tokenization(2021)](https://arxiv.org/pdf/2106.12672v2.pdf) 등 다양한 메소드로 수행.
+    - Details: [PapersWithCode](https://paperswithcode.com/methods/category/subword-segmentation)
     - <i>예시</i>
     <br>
 
@@ -82,6 +83,7 @@ lowest
 <br>
 
 ### **BPE 알고리즘을 사용한 경우**
+![Byte Pair Encoding](https://blog.kakaocdn.net/dn/cam9jp/btqQt4yJsLT/NUK4W9OJ2zY4j4GVSaUxv0/img.png)
 1. word를 character로 분리
     - 이제부터 dictionary는 vocabulary 업데이트에도 쓰이고, 자기 자신도 업데이트됨
 
@@ -154,19 +156,26 @@ lowest = low + est
 <br>
 
 ### **코드 실습하기**
-[Colab NoteBook](https://colab.research.google.com/drive/19an5Ckk_g9amhol4FjBZ8nsiRZAtXA9h#scrollTo=3_)
+[Colab NoteBook](https://colab.research.google.com/drive/18hbax12YHXtZN4e-YZbge8rTqabbDpkz#scrollTo=U11TkEMH4ULT)
 
 <br>
 
 ### **OOV에 대처하기**
-[Colab NoteBook](https://colab.research.google.com/drive/19an5Ckk_g9amhol4FjBZ8nsiRZAtXA9h#scrollTo=f8t73rh0yxv_)
+[Colab NoteBook](https://colab.research.google.com/drive/18hbax12YHXtZN4e-YZbge8rTqabbDpkz#scrollTo=jx7Qs90v4ZRm)
 
 <br><br><br>
 
 ## <i>Wordpiece Model</i>
-- 구글 번역기, BERT
+- [구글 번역기](https://arxiv.org/pdf/1609.08144.pdf), [BERT](https://arxiv.org/pdf/1810.04805.pdf)
 - WPM: BPE의 변형 알고리즘
+- completely data-driven and guaranteed to generate a deterministic segmentation for any possible sequence of characters.
 
+<br>
+
+- > **<i>Using wordpieces gives a good balance between the flexibility of single characters and the efficiency of full words for decoding, and also sidesteps the need for special treatment of unknown words.</i>**
+
+<br>
+ 
 |WPM|BPE|
 |:---:|:---:|
 |merge 되었을 때 corpus의 likelihodd를 가장 높이는 pair를 merge|frequency가 가장 높은 pair를 merge|
@@ -196,18 +205,18 @@ lowest = low + est
 ## <i>What is SentencePiece?</i>
 - 구글이 공개한 센텐스피스 [깃허브](https://github.com/google/sentencepiece)
 - BPE, Unigram Language Model Tokenizer
-- pretokenization을 하지 않은 raw data에 바로 word segmentation tokenizer를 수행함
+- 사전 토큰화 작업 없이, 전처리를 하지 않은 raw data에 바로 적용
     - 언어에 종속되지 않는다.
 
 <br><br><br>
 
 ## <i>Tokenizing IMDB Review</i>
-[Colab NoteBook](https://colab.research.google.com/drive/1E7qE-P4EiJgZk6uuh2FHNps9Q4eCfmvM#scrollTo=FJfhvWy-OdL8)
+[Colab NoteBook](https://colab.research.google.com/drive/15AdwY_9YIwVRVQvR_BQcV1kYcpwDw-kI#scrollTo=1MG46R5WN1I4)
 
 <br><br><br>
 
 ## <i>Tokenizing Naver Movie Review</i>
-[Colab NoteBook](https://colab.research.google.com/drive/1E7qE-P4EiJgZk6uuh2FHNps9Q4eCfmvM#scrollTo=WbKv_6sER3AX)
+[Colab NoteBook](https://colab.research.google.com/drive/15AdwY_9YIwVRVQvR_BQcV1kYcpwDw-kI#scrollTo=7rWRjHodQhI2)
 
 <br><br><br><br>
 ======
@@ -219,7 +228,7 @@ lowest = low + est
 <br><br><br>
 
 ## <i>Tokenizing IMDB Review</i>
-[Colab NoteBook]()
+[Colab NoteBook](https://colab.research.google.com/drive/1NoTly8RP6f_55_zUYSa2CE2hn_YPn6Q0#scrollTo=OvM_81ngSUyv)
 
 <br><br><br>
 
