@@ -1,0 +1,152 @@
+## # NLP에서의 Pre-training
+> ##### 사전 훈련된 워드 임베딩
+
++ Word2Vec과 같은 임베딩 알고리즘을 방대한 데이터로 학습시킨 후 학습된 임베딩 벡터들을 가져와 사용하는 방법 -> 단어의 문맥을 파악하기 어렵다(ex : 사과)
+
+> ##### 사전 훈련된 언어 모델
+
++ LSTM 언어모델 학습 후 텍스트 분류에 추가 학습
++ ELMo : 순방향, 역방향 언어모델 각각 딸 학습 후 임베딩 값 얻기. -> Word2Vec, GloVe등의 워드 임베딩 문제 해결
++ 트렌스포머 디코더 사전훈련 -> GPT-1
+
+---
+
+# # BERT
+
+> ## BERT 개요, 특징
+
+<img src="https://user-images.githubusercontent.com/59716219/133591410-316043d5-6c94-46cd-aa50-5e767f0b6c3b.png" width="500" height="200">
+
++ 트랜스포머의 인코더를 쌓아올린 구조
++ 위키피디아(25억 단어)와 BooksCorpus(8어 단어)와 같은 "레이블이 없는"텍스트 데이터로 사전 훈련된 언어모델
++ 사전 훈련 모델을 가지고 Fine tuning을 하여 높은 성능을 낸 것이 특징
++ BERT는 문맥을 반영한다
++ WordPiece 토크나이저를 사용하여 학습한다.
++ 포지션 임베딩, 세그먼트 임베딩, 워드피스 임베딩을 사용하여 학습 시킨다.  
+
++ BERT-Base : 트랜스포머 인코더를 총 12개를 쌓아올린 구조. 110M개의 파라미터르 가진다. (벡터의 크기 : 768, 셀프어텐션의 헤드의 수 : 12)
++ BERT-Large : 트랜스포머 인코더를 총 24개를 쌓아올린 구조. 340M개의 파라미터를 가진다. 
+
+  ---
+
+> ## BERT의 Pre-training
+
+### 1) 마스크드 언어모델(Masked Language Model, MLM)
+
+<img src="https://user-images.githubusercontent.com/59716219/133591684-c00faaa9-4409-4cdc-a6b6-0d5e94b43dbc.png" width="220" height="150">
+
++ 전체 단어의 85%는 모델의 학습에 사용되지 않는다.
++ 15%의 단어를 랜덤으로 고른 후, 그중 80%의 단어는 [MASK]로 대체하며, 10%는 랜덤으로 단어가 대체되고, 10%의 단어들은 동일하게 놔두게 된다. 
++ 이렇게 하는 이유 : [MASK] 토큰은 파인튜닝단계에서는 나타나지 않는다. 사전 학습 단계와 파인 튜닝 단계에서 불일치를 줄이기 위해 이렇게 사용한다. 
+
+<img src="https://user-images.githubusercontent.com/59716219/133592218-8ace5e2f-4fb5-4475-8867-a8d8d74ba00f.png" width="350" height="250">
+
++ 현재 'dog'토큰이 [MASK]로 변경되었다고 하자. BERT모델은 원래 단어를 맞추기 위해 'dog'토큰의 위치 외 다른 위치의 예측은 무시한다.
++ 아래 그림은 [MASK]토큰, 다른 단어 대체된 경우, 그대로인 경우 모두에서 예측을 진행하는 경우이다. 
+
+ <img src="https://user-images.githubusercontent.com/59716219/133592887-4371e0fb-84dd-4945-9198-e2bf345534e4.png" width="350" height="220">
+
+### 2) 다음 문장 예측(Next Sentence Prediction, NSP)
+
+ <img src="https://user-images.githubusercontent.com/59716219/133593092-5a008099-6cd2-47aa-be71-12455ba9d30b.png" width="350" height="220">
+
++ 이 예측은 문장이 이어지는 문장인지, 아닌지를 예측하는 task이다. 
++ 50:50의 비율로 실제 이어지는 문장과, 랜덤으로 이어붙인 두개의 문장을 주고 훈련시킨다. 
++ [CLS]토큰 : BERT가 분류문제를 풀기위해 추가된 토큰. 이 토큰 위치의 출력층에서 이진분류 문제를 풀게된다
++ [SEP]토큰 : 각 문장의 끝에 붙여준다. 문장을 구분하기 위한 토큰
++ QA(Qiestion Answering), NLI(Natural Language Inference)같은 task를 위해 사전학습을 시킨 것이기도 하다. 
+
+  ---
+  
+  
+> ## BERT의 학습
+
+### 1) Contextual Embedding
+
+ <img src="https://user-images.githubusercontent.com/59716219/133593493-4ebff785-5561-4c3d-9c85-4ce69cd61b6e.png" width="400" height="160">
+ 
+ + BERT의 연산을 거치면 모든 단어 벡터들을 참고한 후 문맥 정보를 가진 벡터가 된다. 
+ + BERT의 모든 단어를 참고하는 연산은 모든 layer에서 이루어지는 연산이다. 
+ + 연산의 내부는 아래의 그림과 같다. 셀프 어텐션을 통해 출력 임베딩을 얻게된다. 
+
+ <img src="https://user-images.githubusercontent.com/59716219/133594656-7588d0ab-50e8-4dae-9011-01c028634225.png" width="400" height="180">
+
+### 2) WordPiece tokenizer
+
++ 이 WordPiece tokenizer는 Byte pair encoding과 유사한 알고리즘이다. 
++ 자주 등장하는 단어는 그대로 단어 집합에 추가하고, 자주 등장하지 않는다면 더 작은 단위의 서브워드로 분리하여 추가한다.
++ 더 작은 단위의 서브워드로 분리할 때, 해당 토큰의 첫번째 서브워드를 제외한 나머지 서브워드들은 앞에 "##"을 붙인 것을 토큰으로 한다.  
++ [PAD] - 0
++ [UNK] - 100
++ [CLS] - 101
++ [SEP] - 102
++ [MASK] - 103
+
+```python
+import pandas as pd
+from transformers import BertTokenizer
+
+tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+
+result = tokenizer.tokenize('embeddings') # ['em', '##bed', '##ding', '##s']
+# "embeddings"는 tokenize.vocab에 존재하지 않는다.
+```
+
+### 3) Position Embedding
+
+ <img src="https://user-images.githubusercontent.com/59716219/133598916-8ea59fba-3237-42da-a564-e6642b11fd25.png" width="300" height="150">
+
++ 포지션 임베딩을 위해 위치 정보를 위한 임베딩 층(Embedding layer)를 하나 더 사용한다. 
++ 문장의 길이가 512라면, 총 512개의 포지션 임베딩 벡터가 학습이 된다. 
+
+### 4) Segment Embedding
+
+ <img src="https://user-images.githubusercontent.com/59716219/133599173-d0bca5a4-a3ed-48cd-9026-cf4e44316af3.png" width="350" height="250">
+
++ BERT의 두개의 문장 입력이 필요한 테스크를 위한 것
++ 문장 구분을 위해 임베딩 층 하나를 더 사용한다. 
++ 첫번째 문장에는 Sentence 0 임베딩, 두번째 문장에는 Sentence 1 임베딩을 더해주는 방식이다. 
++ 여기서 문장은 하나의 문장일수도 있고, QA같은 테스크에서는 질문, 본문과 같이 다수의 문장으로 구성될 수도 있다. 
+
+### 5) Attention Mask
+
+ <img src="https://user-images.githubusercontent.com/59716219/133599731-6a8f4257-986d-4908-a156-4f81106d8439.png" width="330" height="220">
+
++ BERT가 어텐션 연산을 할 때, 불필요하게 패딩 토큰에 대해 어텐션을 수행하지 않게 실제 단어와 패딩 토큰을 구분할 수 있도록 알려주는 입력이다. 
++ 숫자 1은 실제 단어이므로 마스킹을 하지 않는다는 의미이며, 숫자 0은 해당 토큰은 패딩 토큰이므로 마스킹을 한다는 의미이다. 
++ 실제 단어 위치에는 1, 패딩 토큰의 위치에는 0의 값을 가지는 시퀀스를 만들어 BERT의 또 다른 입력으로 사용하면 된다. 
+
+
+  ---
+  
+> ## BERT의 Fine-tuning
+
+### 1) 텍스트 분류
+
+ <img src="https://user-images.githubusercontent.com/59716219/133600166-499f2900-8dab-4336-bdb6-5acb471921a9.png" width="300" height="230">
+
++ [CLS]토큰의 출력층에서 Dense layer(Fully-Connected Layer)라고 불리는 층을 추가하여 분류에 대한 예측을 하게 된다. 
+
+
+### 2) 텍스트 태깅 작업
+
+ <img src="https://user-images.githubusercontent.com/59716219/133600975-bb9aad17-1037-4a3e-87ec-25f1c7ae04f0.png" width="300" height="210">
+ 
+ + 품사 태깅 작업, 개체명 인식 작업등이 있다. 
+ + 각 출력층에서 입력 텍스트의 각 토큰의 위치에 Dense layer(Fully-connected Layer)를 사용하여 분류에 대한 예측을 하게 된다. 
+ 
+ 
+### 3) 텍스트 쌍의 분류, 회귀 문제
+
+ <img src="https://user-images.githubusercontent.com/59716219/133621911-0153d41f-aaa3-44b9-a414-c8ed49314c20.png" width="300" height="190">
+
++ 자연어 추론 문제 : 두 문장이 주어졌을 때, 하나의 문장이 다른 문장과 논리적으로 어떤 관계에 있는지를 분류하는 것. 유형으로는 모순 관계(contradiction), 함의 관계(entailment), 중립 관계(neutral)가 있다. 
++ 이러한 종류는 입력 텍스트가 최소 2개이므로, 텍스트 사이에 [SEP]토큰을 넣고 Sentence 0 임베딩과 Sentence 1 임베딩이라는 두 종류의 세그먼트 임베딩을 모두 사용하여 문서를 구분한다. 
+
+### 4)QA
+
+ <img src="https://user-images.githubusercontent.com/59716219/133622331-0c50c657-78f0-4a63-abf1-5ba0a8d0eefd.png" width="300" height="190">
+
++ 질문과 본문 두개의 텍스트의 쌍을 입력한다. 
++ 대표적인 데이터셋으로 SQuAD(Stanford Question Answering Dataset)이 있다. 
+
